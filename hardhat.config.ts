@@ -71,7 +71,7 @@ const xdai = {
   accounts: {
     mnemonic: DEPLOYER_MNEMONIC,
   },
-  chainId: 100,
+  chainId: 9997,
   gasMultiplier: 5,
 };
 
