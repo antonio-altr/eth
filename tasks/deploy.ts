@@ -47,13 +47,13 @@ async function deploy(
 
   // Only when deploying to production, give the deployer wallet money,
   // in order for it to be able to deploy the contracts
-  if (!isDev && balance.lt(requires)) {
-    throw new Error(
-      `${deployer.address} requires ~$${hre.ethers.utils.formatEther(
-        requires
-      )} but has ${hre.ethers.utils.formatEther(balance)} top up and rerun`
-    );
-  }
+  // if (!isDev && balance.lt(requires)) {
+  //   throw new Error(
+  //     `${deployer.address} requires ~$${hre.ethers.utils.formatEther(
+  //       requires
+  //     )} but has ${hre.ethers.utils.formatEther(balance)} top up and rerun`
+  //   );
+  // }
 
   const [diamond, diamondInit, initReceipt] = await deployAndCut(
     { ownerAddress: deployer.address, whitelistEnabled, initializers: hre.initializers },
@@ -70,17 +70,17 @@ async function deploy(
   );
 
   // Note Ive seen `ProviderError: Internal error` when not enough money...
-  console.log(`funding whitelist with ${args.fund}`);
+  // console.log(`funding whitelist with ${args.fund}`);
 
-  const tx = await deployer.sendTransaction({
-    to: diamond.address,
-    value: hre.ethers.utils.parseEther(args.fund.toString()),
-  });
-  await tx.wait();
+  // const tx = await deployer.sendTransaction({
+  //   to: diamond.address,
+  //   value: hre.ethers.utils.parseEther(args.fund.toString()),
+  // });
+  // await tx.wait();
 
-  console.log(
-    `Sent ${args.fund} to diamond contract (${diamond.address}) to fund drips in whitelist facet`
-  );
+  // console.log(
+  //   `Sent ${args.fund} to diamond contract (${diamond.address}) to fund drips in whitelist facet`
+  // );
 
   // give all contract administration over to an admin adress if was provided
   if (hre.ADMIN_PUBLIC_ADDRESS) {
